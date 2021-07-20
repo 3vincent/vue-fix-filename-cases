@@ -81,18 +81,18 @@ async function rewriteFilePaths(oldFileName, newFileName, linkedFrom) {
   let data = ''
   try {
     data = await readFile(wholePath, 'utf-8')
-    console.log('\x1b[42m', 'Gelesen:', '\x1b[0m', linkedFrom)
+    console.log('\x1b[42m', 'now reads file:', '\x1b[0m', linkedFrom)
   } catch (error) {
     console.log(error)
   }
-  console.log('\x1b[41m', 'data: ', oldFileName, '\x1b[0m', data)
+  console.log('\x1b[41m', 'read data: ', oldFileName, '\x1b[0m', data)
   const regularExpr = new RegExp(oldFileName, 'g')
   const result = data.replace(regularExpr, newFileName)
-  console.log('\x1b[45m', 'was soll ich schreiben?: ', '\x1b[0m', result)
+  console.log('\x1b[45m', 'this will be written: ', '\x1b[0m', result)
 
   try {
     await writeFile(wholePath, result, 'utf8')
-    console.log('\x1b[42m', 'geschrieben:', '\x1b[0m', linkedFrom)
+    console.log('\x1b[42m', 'written:', '\x1b[0m', linkedFrom)
   } catch (error) {
     console.log(error)
   }
