@@ -1,0 +1,53 @@
+{
+  "name": "vue-lowercase-files",
+  "version": "0.1.0",
+  "description": "Make Vue.js files after installation lowercase and kebab-case",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "lint": "lint-staged",
+    "lint-only": "eslint .",
+    "lint-all": "pretty-quick && eslint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "pretty-quick --staged",
+      "eslint --fix"
+    ],
+    "*.+(json|css|md)": [
+      "pretty-quick --staged"
+    ]
+  },
+  "keywords": [
+    "vue",
+    "vuejs",
+    "lowercase",
+    "after-installation",
+    "post-installation"
+  ],
+  "author": "Ben Sukstorf",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "eslint-plugin-vue": "^7.14.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.0.1",
+    "prettier": "^2.3.2",
+    "pretty-quick": "^3.1.1"
+  }
+}
