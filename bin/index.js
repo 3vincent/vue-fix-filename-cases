@@ -7,28 +7,44 @@ const logSymbols = require('log-symbols')
 
 const filesToRename = [
   {
-    origName: 'App.vue',
-    newName: 'app.vue',
-    directory: 'src/',
-    linkedFrom: ['src/main.js'],
+    original: {
+      path: 'src/',
+      filename: 'App.vue',
+    },
+    linkedFrom: {
+      path: 'src/',
+      filename: 'main.js',
+    },
   },
   {
-    origName: 'HelloWorld.vue',
-    newName: 'hello-world.vue',
-    directory: 'src/components/',
-    linkedFrom: ['src/views/Home.vue'],
+    original: {
+      path: 'src/components/',
+      filename: 'HelloWorld.vue',
+    },
+    linkedFrom: {
+      path: 'src/views/',
+      filename: 'Home.vue',
+    },
   },
   {
-    origName: 'About.vue',
-    newName: 'about.vue',
-    directory: 'src/views/',
-    linkedFrom: ['src/router/index.js'],
+    original: {
+      path: 'src/views/',
+      filename: 'About.vue',
+    },
+    linkedFrom: {
+      path: 'src/router/',
+      filename: 'index.js',
+    },
   },
   {
-    origName: 'Home.vue',
-    newName: 'home.vue',
-    directory: 'src/views/',
-    linkedFrom: ['src/router/index.js'],
+    original: {
+      path: 'src/views/',
+      filename: 'Home.vue',
+    },
+    linkedFrom: {
+      path: 'src/router/',
+      filename: 'index.js',
+    },
   },
 ]
 
@@ -111,8 +127,8 @@ async function rewriteFilePaths(oldFileName, newFileName, linkedFrom) {
 async function rewriteVueFilesAndPaths() {
   // eslint-disable-next-line no-restricted-syntax
   for await (const file of filesToRename) {
-    await renameFile(file.origName, file.newName, file.directory)
-    await rewriteFilePaths(file.origName, file.newName, file.linkedFrom)
+    await renameFile(file.original.filename, file.original.path)
+    await rewriteFilePaths(file.original.filename, file.linkedFrom.path, file.linkedFrom.filename)
     console.log('')
   }
 }
