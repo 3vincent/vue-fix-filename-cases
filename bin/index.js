@@ -47,6 +47,7 @@ if (!existsSync(args[0])) {
 const vueInstallationFiles = ['src/main.js', 'node_modules/vue/dist/vue.js']
 vueInstallationFiles.forEach(file => {
   if (!existsSync(`${args[0]}${file}`)) {
+    console.log(`*** Error: File ${file} not found`)
     console.log('*** Error: Please provide the path to your vue.js folder')
     console.log('*** EXAMPLE: $ vue-fix-filename-cases frontend/')
     console.log('*** Exiting...')
