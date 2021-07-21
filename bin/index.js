@@ -33,11 +33,8 @@ const filesToRename = [
 
 const args = process.argv.slice(2, process.argv.length)
 if (args.length == 0) {
-  console.log('*** Error: Please provide the path to your vue.js folder')
-  console.log('*** Exiting...')
-  process.exit(0)
+  args.push('./')
 }
-
 if (args[0][args[0].length - 1] != '/') {
   args[0] += '/'
 }
