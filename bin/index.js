@@ -2,6 +2,7 @@
 
 const { readFile, writeFile } = require('fs').promises
 const { readdirSync, renameSync, existsSync } = require('fs')
+const { paramCase } = require('change-case')
 
 const filesToRename = [
   {
