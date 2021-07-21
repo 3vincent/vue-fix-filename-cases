@@ -87,23 +87,25 @@ function convertFileNameToKebabCase(filename) {
   return `${fileBody}${fileEnding}`
 }
 
-async function renameFile(oldFileName, newFileName, location) {
-  const oldFileLocation = `${vuejsRootFolder}${location}${oldFileName}`
-  const newFileLocation = `${vuejsRootFolder}${location}${newFileName}`
-  console.log(`### Renaming ${oldFileLocation} => ${newFileLocation}`)
+async function renameFile(filename, location) {
+  const newFilename = convertFileNameToKebabCase(filename)
+  const oldFileLocation = `${vuejsRootFolder}${location}${filename}`
+  const newFileLocation = `${vuejsRootFolder}${location}${newFilename}`
+  console.log(logSymbols.info, `=> Renaming ${oldFileLocation} => ${newFileLocation}`)
   if (
-    fileExists(`${vuejsRootFolder}${location}`, oldFileName) &&
-    !fileExists(`${vuejsRootFolder}${location}`, newFileName)
+    fileExists(`${vuejsRootFolder}${location}`, filename) &&
+    !fileExists(`${vuejsRootFolder}${location}`, newFilename)
   ) {
     await renameSync(oldFileLocation, newFileLocation)
-    if (fileExists(`${vuejsRootFolder}${location}`, newFileName)) console.log('..Success!')
+    if (fileExists(`${vuejsRootFolder}${location}`, newFilename))
+      console.log(logSymbols.success, '..success renaming file!')
     return true
   }
-  if (fileExists(`${vuejsRootFolder}${location}`, newFileName)) {
-    console.log(`*** ERROR: New file already exists: ${newFileLocation}`)
+  if (fileExists(`${vuejsRootFolder}${location}`, newFilename)) {
+    console.log(logSymbols.error, `*** ERROR while renaming: New file already exists: ${newFileLocation}`)
     return false
   }
-  console.log(`*** ERROR: File does not exist: ${oldFileLocation}`)
+  console.log(logSymbols.error, `*** ERROR while renaming: File does not exist: ${oldFileLocation}`)
   return false
 }
 
