@@ -81,6 +81,12 @@ function fileExists(path, file) {
   return false
 }
 
+function convertFileNameToKebabCase(filename) {
+  const fileBody = paramCase(filename.substring(0, filename.lastIndexOf('.')))
+  const fileEnding = filename.substring(filename.lastIndexOf('.')).toLowerCase()
+  return `${fileBody}${fileEnding}`
+}
+
 async function renameFile(oldFileName, newFileName, location) {
   const oldFileLocation = `${vuejsRootFolder}${location}${oldFileName}`
   const newFileLocation = `${vuejsRootFolder}${location}${newFileName}`
