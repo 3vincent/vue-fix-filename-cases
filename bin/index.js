@@ -56,18 +56,18 @@ if (args[0][args[0].length - 1] != '/') {
   args[0] += '/'
 }
 if (!existsSync(args[0])) {
-  console.log('*** Error: The provided path does not exist!')
-  console.log('*** Exiting...')
+  console.log(logSymbols.error, '*** Error: The provided path does not exist!')
+  console.log(logSymbols.error, '*** Exiting...')
   process.exit(0)
 }
 
 const vueInstallationFiles = ['src/main.js', 'node_modules/vue/dist/vue.js']
 vueInstallationFiles.forEach(file => {
   if (!existsSync(`${args[0]}${file}`)) {
-    console.log(`*** Error: File ${file} not found`)
-    console.log('*** Error: Please provide the path to your vue.js folder')
-    console.log('*** EXAMPLE: $ vue-fix-filename-cases frontend/')
-    console.log('*** Exiting...')
+    console.log(logSymbols.error, `*** Error: File ${file} not found`)
+    console.log(logSymbols.error, '*** Error: Please provide the path to your vue.js folder')
+    console.log(logSymbols.error, '*** EXAMPLE: $ vue-fix-filename-cases frontend/')
+    console.log(logSymbols.error, '*** Exiting...')
     process.exit(0)
   }
 })
