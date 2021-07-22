@@ -92,58 +92,61 @@ async function renameFile(filename, location) {
   const oldFileLocation = `${vuejsRootFolder}${location}${filename}`
   const newFileLocation = `${vuejsRootFolder}${location}${newFilename}`
   console.log(logSymbols.info, `=> Renaming ${oldFileLocation} => ${newFileLocation}`)
-  if (
-    fileExists(`${vuejsRootFolder}${location}`, filename) &&
-    !fileExists(`${vuejsRootFolder}${location}`, newFilename)
-  ) {
-    await renameSync(oldFileLocation, newFileLocation)
-    if (fileExists(`${vuejsRootFolder}${location}`, newFilename))
-      console.log(logSymbols.success, '..success renaming file!')
-    return true
-  }
   if (fileExists(`${vuejsRootFolder}${location}`, newFilename)) {
     console.log(logSymbols.error, `*** ERROR while renaming: New file already exists: ${newFileLocation}`)
     return false
   }
-  console.log(logSymbols.error, `*** ERROR while renaming: File does not exist: ${oldFileLocation}`)
-  return false
+  if (!fileExists(`${vuejsRootFolder}${location}`, filename)) {
+    console.log(logSymbols.error, `*** ERROR while renaming: File does not exist: ${oldFileLocation}`)
+    return false
+  }
+  await renameSync(oldFileLocation, newFileLocation)
+  if (!fileExists(`${vuejsRootFolder}${location}`, newFilename)) {
+    console.log(
+      logSymbols.error,
+      `*** ERROR while renaming: Could not rename file ${oldFileLocation} to ${newFileLocation}`
+    )
+    console.log(logSymbols.error, 'GURU MEDITATION ERROR 101')
+    return false
+  }
+  console.log(logSymbols.success, '..success renaming file!')
+  return true
 }
 
 async function rewriteFilePaths(filename, linkedFromPath, linkedFromFile) {
   const newFilename = convertFileNameToKebabCase(filename)
   let data = ''
-
   const wholePath = `${vuejsRootFolder}${linkedFromPath}${linkedFromFile}`
   console.log(logSymbols.info, `=> Re-writing path in file ${wholePath}: ${filename} => ${newFilename}`)
-  if (fileExists(`${vuejsRootFolder}${linkedFromPath}`, linkedFromFile)) {
-    try {
-      data = await readFile(wholePath, 'utf-8')
-      // console.log('\x1b[42m', 'now reads file:', '\x1b[0m', `${linkedFromPath}${linkedFromFile}`)
-    } catch (error) {
-      console.log(error)
-    }
-    // console.log('\x1b[41m', 'read data: ', filename, '\x1b[0m', data)
-    const regularExpr = new RegExp(filename, 'g')
-    const result = data.replace(regularExpr, newFilename)
-    // console.log('\x1b[45m', 'this will be written: ', '\x1b[0m', result)
-    if (data != result) {
-      try {
-        await writeFile(wholePath, result, 'utf8')
-        // console.log('\x1b[42m', 'written:', '\x1b[0m', `${linkedFromPath}${linkedFromFile}`)
-      } catch (error) {
-        console.log(error)
-      }
-      console.log(logSymbols.success, '..success re-writing file content!')
-      return true
-    }
-    console.log(logSymbols.error, `*** ERROR while re-writing file content: nothing to rename`)
-    return true
+  if (!fileExists(`${vuejsRootFolder}${linkedFromPath}`, linkedFromFile)) {
+    console.log(
+      logSymbols.error,
+      `*** ERROR while re-writing file content: File does not exist: ${vuejsRootFolder}${linkedFromPath}${linkedFromFile}`
+    )
+    return false
   }
-  console.log(
-    logSymbols.error,
-    `*** ERROR while re-writing path: File does not exist: ${vuejsRootFolder}${linkedFromPath}${linkedFromFile}`
-  )
-  return false
+  try {
+    data = await readFile(wholePath, 'utf-8')
+    // console.log('\x1b[42m', 'now reads file:', '\x1b[0m', `${linkedFromPath}${linkedFromFile}`)
+  } catch (error) {
+    console.log(error)
+  }
+  // console.log('\x1b[41m', 'read data: ', filename, '\x1b[0m', data)
+  const regularExpr = new RegExp(filename, 'g')
+  const result = data.replace(regularExpr, newFilename)
+  // console.log('\x1b[45m', 'this will be written: ', '\x1b[0m', result)
+  if (data == result) {
+    console.log(logSymbols.error, `*** ERROR while re-writing file content: nothing to rename`)
+    return false
+  }
+  try {
+    await writeFile(wholePath, result, 'utf8')
+    // console.log('\x1b[42m', 'written:', '\x1b[0m', `${linkedFromPath}${linkedFromFile}`)
+  } catch (error) {
+    console.log(error)
+  }
+  console.log(logSymbols.success, '..success re-writing file content!')
+  return true
 }
 
 async function rewriteVueFilesAndPaths() {
