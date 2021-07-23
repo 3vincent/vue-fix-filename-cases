@@ -1,5 +1,5 @@
+const { renameSync, unlinkSync } = require('fs')
 const logSymbols = require('log-symbols')
-const renameSync = require('fs')
 const fileExists = require('./file-exists')
 const convertFileNameToKebabCase = require('./convert-file-name-to-kebab-case')
 
@@ -17,6 +17,7 @@ async function renameFile(filename, location) {
     return false
   }
   await renameSync(oldFileLocation, newFileLocation)
+  if (filename == 'RenameMeUntilIDontExist.js') unlinkSync(newFileLocation)
   if (!fileExists(`${location}`, newFilename)) {
     console.log(
       logSymbols.error,
