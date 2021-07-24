@@ -8,6 +8,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --testEnvironment=node --verbose --forceExit --watchAll --maxWorkers=1",
+    "test-watchAll": "jest --watchAll",
     "test-coverage": " jest --collect-coverage --testEnvironment=node --forceExit --maxWorkers=1",
     "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
     "start": "node index.js",
