@@ -105,4 +105,7 @@ dist
 .tern-port
 
 # Vue Test Installation
-frontend
+frontend/
+
+# test coverage
+coverage/
