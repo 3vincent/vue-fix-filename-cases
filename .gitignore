@@ -109,3 +109,6 @@ frontend/
 
 # test coverage
 coverage/
+
+# Apple macOS Finder Files
+.DS_Store
