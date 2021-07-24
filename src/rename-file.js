@@ -17,7 +17,6 @@ async function renameFile(filename, location) {
     return false
   }
   await renameSync(oldFileLocation, newFileLocation)
-  if (filename == 'RenameMeUntilIDontExist.js') unlinkSync(newFileLocation)
   if (!fileExists(`${location}`, newFilename)) {
     console.log(
       logSymbols.error,
