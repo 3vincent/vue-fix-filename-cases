@@ -1,4 +1,4 @@
-# vue-rename-lowercase-files for vue.js 2
+# vue-rename-lowercase-files for vue.js
 
 This npm Library renames the default files in Vue.js 2 and Vue.js 3 to lowercase.
 
