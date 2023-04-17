@@ -1,6 +1,6 @@
 {
   "name": "vue-fix-filename-cases",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Make Vue.js files after installation lowercase and kebab-case",
   "bin": {
     "vue-fix-filename-cases": "bin/index.js"

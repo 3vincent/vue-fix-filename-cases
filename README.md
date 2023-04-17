@@ -1,13 +1,14 @@
 # vue-rename-lowercase-files for vue.js 2
 
-This npm Library renames the default files in vue.js 2 to lowercase.
-The Library can be run with
+This npm Library renames the default files in Vue.js 2 and Vue.js 3 to lowercase.
 
-    $ npx
+The library can be run with
+
+    $ npx vue-rename-lowercase-files {vue-directory}
 
 right after installation.
 
-After setting up a new vue.js 2 Installation there are several files in the folder that have uppercase letter in them:
+After setting up a new Vue.js Installation there are several files in the folder that have uppercase letter in them:
 
 - src/App.vue
 - components/HelloWorld.vue
@@ -16,11 +17,28 @@ After setting up a new vue.js 2 Installation there are several files in the fold
 
 This Library renames files to lowercase and also updates the corresponding links inside other files.
 
+## Why do we need to rename uppercase files?
+
+Having uppercase files in your vue/node project folder can lead to several problems. For example `git` does not track file renames that are case-sensitive. So when you decide to rename `App.vue` into `app.vue` after you have already committed the initial file, then git will not track this rename.
+
+Other problems can occur when you are working in a team whose participants are using different operating systems. For example, when a member in your team uses a case-sensitive file system they can have `App.vue` and `app.vue` in the same directory. On case-insensitive file systems this will lead to errors.
+
+Another motivation to create this script is my personal preference to have file names in kebab-case.
+
+## Example
+
+First clone the project from GitHub.
+Go to the installation directory and execute `$ npx vue-rename-lowercase-files {path to vue directory}`, i.e.
+
+    $ npx vue-rename-lowercase-files /Users/3vincent/my-vue-app
+
+This should be done before committing the vue project.
+
 ## License
 
 MIT License
 
-Copyright (c) 2021 3vincent
+Copyright (c) 2023 3vincent
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
