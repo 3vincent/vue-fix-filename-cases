@@ -1,6 +1,6 @@
-# vue-rename-lowercase-files for vue.js
+# vue-fix-filename-cases for vue.js
 
-This npm Library renames the default files in Vue.js 2 and Vue.js 3 to lowercase.
+This npm Library renames the default files in Vue.js 2 and Vue.js 3 from Pascal case to kebab case.
 
 The library can be run with
 
@@ -8,7 +8,7 @@ The library can be run with
 
 right after installation.
 
-After setting up a new Vue.js Installation there are several files in the folder that have uppercase letter in them:
+After setting up a new Vue.js Installation there are several files that have uppercase letter in them:
 
 - src/App.vue
 - components/HelloWorld.vue
