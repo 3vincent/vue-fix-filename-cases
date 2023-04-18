@@ -4,7 +4,7 @@ This npm Library renames the default files in Vue.js 2 and Vue.js 3 to lowercase
 
 The library can be run with
 
-    $ npx vue-rename-lowercase-files {vue-directory}
+    $ npx vue-fix-filename-cases {vue-directory}
 
 right after installation.
 
@@ -28,9 +28,9 @@ Another motivation to create this script is my personal preference to have file 
 ## Example
 
 First clone the project from GitHub.
-Go to the installation directory and execute `$ npx vue-rename-lowercase-files {path to vue directory}`, i.e.
+Go to the installation directory and execute `$ npx vue-fix-filename-cases {path to vue directory}`, i.e.
 
-    $ npx vue-rename-lowercase-files /Users/3vincent/my-vue-app
+    $ npx vue-fix-filename-cases /Users/3vincent/my-vue-app
 
 This should be done before committing the vue project.
 
